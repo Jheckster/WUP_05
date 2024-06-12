@@ -20,6 +20,12 @@ A new  preventative aides drug (triUmpsal) is under test in clinical trials. Con
 # Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
+  
+Our methods included obtaining all the categorical data, and finding out the number of drug users versus the information of infections rates. 
+
+```{r}
+druguser<- filter(triUmp, DrugUser=="yes")
+```
 
 # Results
 
@@ -30,10 +36,25 @@ A new  preventative aides drug (triUmpsal) is under test in clinical trials. Con
 ### Graphical Descriptive Results
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question. Bottom line is to explain the features of the graph that are relevant to conforming or departing to what is expected by your null hypothesis !-->
+```{r}
+barchartGC(~infected + treatment,data=druguser)
+barchartGC(~infected + treatment,data=druguser, type="percent")
+
+```
+    
+The treatment information can be displayed neatly with two slides comparing the answer of whether or not a patient received the drug and their infection being altered. The first slide shows the frequency of the drug administration and the usage of the placebo versus the drug, the pink column shows that there is a greater frequency of patients given the placebo had the disease less affected. Whereas the blue column represents that the frequency was less when the drug was introduced to the patient with the disease. This drastic measurement is shown on slide two.  
+
 
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+```{r}
+table1 <- xtabs(~infected + treatment, data=druguser)
+rowPerc(table1)
+colPerc(table1)
+```  
+
+In this numerical summary the numbers of patients affected by the drug are placed blatantly to the patients affected by the placebo drug. The totals both remain at 100, but the comparative numbers of the success of the placebo patients are a 47.59, compared to the second portion under the drug patients are 97.11. These numbers can initially provide us that the results show a definite difference of numerical data.
 
 ## Inferential Results
 
